@@ -1,0 +1,202 @@
+.settings { animation: fadeIn 0.3s ease; }
+
+.header { margin-bottom: 1.5rem; }
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--gold-light);
+  margin-bottom: 0.25rem;
+}
+
+.sectionSub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--smoke);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.section {
+  background: rgba(255,255,255,0.025);
+  border: var(--border-thin);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  transition: border-color var(--transition);
+}
+
+.section:hover { border-color: var(--amber-dim); }
+
+.sectionHeading {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--parchment-dark);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sectionIcon {
+  color: var(--amber);
+  font-size: 0.9rem;
+}
+
+.sectionDesc {
+  font-size: 0.88rem;
+  color: var(--smoke-light);
+  line-height: 1.6;
+  margin-bottom: 0.9rem;
+}
+
+.keyRow {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+}
+
+.input {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: var(--border-thin);
+  color: var(--parchment);
+  padding: 0.55rem 0.8rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-family: var(--font-mono);
+  transition: border-color var(--transition);
+}
+
+.input:focus { outline: none; border-color: var(--amber); }
+.input::placeholder { color: var(--smoke); }
+
+.showBtn {
+  padding: 0.55rem 0.9rem;
+  border: var(--border-thin);
+  color: var(--smoke-light);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius);
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.showBtn:hover { border-color: var(--amber-dim); color: var(--parchment-dark); }
+
+.keyActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.65rem;
+}
+
+.saveBtn {
+  padding: 0.5rem 1.3rem;
+  background: var(--amber);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: var(--radius);
+  transition: background var(--transition);
+}
+
+.saveBtn:hover { background: var(--amber-light); }
+
+.keyStatus {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #6aab6a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.keyNote {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--smoke);
+}
+
+.keyNote a { color: var(--amber-light); }
+.keyNote a:hover { color: var(--gold-light); }
+
+.dataStats {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.statNum {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--gold-light);
+  line-height: 1;
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--smoke);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.dataActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.exportBtn, .importBtn {
+  padding: 0.5rem 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: var(--radius);
+  transition: all var(--transition);
+  cursor: pointer;
+}
+
+.exportBtn {
+  background: var(--amber-dim);
+  color: var(--parchment);
+  border: 1px solid var(--amber-dim);
+}
+
+.exportBtn:hover { background: var(--amber); border-color: var(--amber); }
+
+.importBtn {
+  border: var(--border-thin);
+  color: var(--smoke-light);
+  display: inline-block;
+}
+
+.importBtn:hover { border-color: var(--amber-dim); color: var(--parchment-dark); }
+
+.links { margin-top: 0.5rem; }
+
+.link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--amber-light);
+  border-bottom: 1px solid var(--amber-dim);
+  padding-bottom: 1px;
+  transition: color var(--transition);
+}
+
+.link:hover { color: var(--gold-light); }

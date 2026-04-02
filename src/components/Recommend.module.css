@@ -1,0 +1,201 @@
+.recommend { animation: fadeIn 0.3s ease; }
+
+.header { margin-bottom: 1.5rem; }
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--gold-light);
+  margin-bottom: 0.25rem;
+}
+
+.sectionSub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--smoke);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.budgetGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.budgetLabel {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--smoke);
+  margin-right: 0.2rem;
+}
+
+.budgetBtn {
+  padding: 0.3rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--smoke-light);
+  border: 1px solid rgba(138,90,26,0.3);
+  border-radius: 20px;
+  transition: all var(--transition);
+}
+
+.budgetBtn:hover { border-color: var(--amber-dim); color: var(--parchment-dark); }
+.budgetBtn.activeBudget { background: var(--amber-dim); color: var(--parchment); border-color: var(--amber-dim); }
+
+.generateBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  background: linear-gradient(135deg, var(--rouge), var(--rouge-light));
+  color: var(--parchment);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: var(--radius);
+  transition: opacity var(--transition);
+  white-space: nowrap;
+}
+
+.generateBtn:hover:not(:disabled) { opacity: 0.85; }
+.generateBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.spinner {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(245,234,216,0.3);
+  border-top-color: var(--parchment);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+.error {
+  background: rgba(139,42,42,0.15);
+  border: 1px solid var(--rouge);
+  color: var(--rouge-light);
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  margin-bottom: 1rem;
+}
+
+.hint {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border: var(--border-ornate);
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+  background: rgba(200,131,42,0.04);
+}
+
+.hintIcon {
+  font-size: 2rem;
+  color: var(--amber-dim);
+  flex-shrink: 0;
+  padding-top: 0.1rem;
+}
+
+.hintTitle {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--parchment-dark);
+  margin-bottom: 0.4rem;
+  font-style: italic;
+}
+
+.hintText {
+  font-size: 0.88rem;
+  color: var(--smoke-light);
+  line-height: 1.6;
+}
+
+.hintNote {
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--smoke);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.75rem;
+}
+
+.card {
+  padding: 1.1rem 1.25rem;
+  background: rgba(255,255,255,0.025);
+  border: var(--border-thin);
+  border-radius: var(--radius);
+  animation: fadeIn 0.35s ease both;
+  transition: border-color var(--transition);
+}
+
+.card:hover { border-color: var(--amber-dim); }
+
+.cardTop { margin-bottom: 0.65rem; }
+
+.cardName {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--parchment);
+  margin-bottom: 0.4rem;
+}
+
+.cardMeta {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.reason {
+  font-size: 0.88rem;
+  color: var(--smoke-light);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
+.unlocks {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  padding-top: 0.65rem;
+  border-top: var(--border-thin);
+}
+
+.unlockLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--smoke);
+}
+
+.unlockTag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 0.1rem 0.5rem;
+  border-radius: 20px;
+}

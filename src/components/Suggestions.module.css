@@ -1,0 +1,233 @@
+.suggestions { animation: fadeIn 0.3s ease; }
+
+.header { margin-bottom: 1.5rem; }
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--gold-light);
+  margin-bottom: 0.25rem;
+}
+
+.sectionSub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--smoke);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.promptBar {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.input {
+  flex: 1;
+  min-width: 200px;
+  background: rgba(255,255,255,0.04);
+  border: var(--border-thin);
+  color: var(--parchment);
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  transition: border-color var(--transition);
+}
+
+.input:focus { outline: none; border-color: var(--amber); }
+.input::placeholder { color: var(--smoke); }
+
+.generateBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  background: linear-gradient(135deg, var(--amber-dim), var(--amber));
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: var(--radius);
+  transition: opacity var(--transition);
+  white-space: nowrap;
+}
+
+.generateBtn:hover:not(:disabled) { opacity: 0.85; }
+.generateBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(26,18,8,0.4);
+  border-top-color: var(--ink);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+.error {
+  background: rgba(139, 42, 42, 0.15);
+  border: 1px solid var(--rouge);
+  color: var(--rouge-light);
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  margin-bottom: 1rem;
+}
+
+.hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: var(--border-thin);
+  border-radius: var(--radius);
+  color: var(--smoke-light);
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.hint span { color: var(--amber-dim); font-size: 1.1rem; margin-top: 0.1rem; }
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card {
+  border: var(--border-thin);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.025);
+  overflow: hidden;
+  animation: fadeIn 0.35s ease both;
+  transition: border-color var(--transition);
+}
+
+.card:hover, .card.open { border-color: var(--amber-dim); }
+
+.cardHeader {
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+}
+
+.cardMeta { margin-bottom: 0.4rem; }
+
+.cardName {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--parchment);
+  margin-bottom: 0.4rem;
+}
+
+.cardDesc {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--smoke-light);
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+}
+
+.flavourTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.cardBody {
+  padding: 0 1.2rem 1.2rem;
+  border-top: var(--border-thin);
+  animation: fadeIn 0.2s ease;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.9rem 0 0.6rem;
+  color: var(--amber-dim);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber-dim), transparent);
+}
+
+.ingredients {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ingredients li {
+  font-size: 0.9rem;
+  color: var(--parchment-dark);
+  padding-left: 1rem;
+  position: relative;
+}
+
+.ingredients li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--amber-dim);
+}
+
+.instructions {
+  font-size: 0.9rem;
+  color: var(--smoke-light);
+  line-height: 1.6;
+}
+
+.why {
+  margin-top: 0.75rem;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--amber-light);
+  padding: 0.6rem 0.9rem;
+  border-left: 2px solid var(--amber-dim);
+  background: rgba(200, 131, 42, 0.06);
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: var(--border-thin);
+}
+
+.rateLabel {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--smoke);
+  margin-right: 0.25rem;
+}
+
+.rateStar {
+  font-size: 1.2rem;
+  color: var(--amber-dim);
+  transition: color var(--transition), transform var(--transition);
+  line-height: 1;
+}
+
+.rateStar:hover {
+  color: var(--gold-light);
+  transform: scale(1.2);
+}
