@@ -1,58 +1,44 @@
 import React, { useState } from 'react'
-import {
-  callClaude,
-  buildCabinetContext,
-  buildTasteContext,
-  SUGGESTION_SYSTEM
-} from '../utils/anthropic.js'
+import { getSuggestions } from '../utils/cocktailMatcher.js'
 import styles from './Suggestions.module.css'
 
 const FLAVOUR_COLORS = {
   sweet: 'gold', sour: 'amber', bitter: 'rouge', smoky: 'amber',
   spicy: 'rouge', herbal: 'gold', fruity: 'amber', floral: 'gold',
   refreshing: 'amber', rich: 'gold', dry: 'amber', strong: 'rouge',
+  nutty: 'gold', light: 'amber',
 }
 
-export default function Suggestions({ cabinet, ratings, apiKey, onAddReview }) {
+export default function Suggestions({ cabinet, ratings, onAddReview }) {
   const [suggestions, setSuggestions] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [prompt, setPrompt] = useState('')
   const [expanded, setExpanded] = useState(null)
 
-  const generate = async () => {
-    if (!apiKey) {
-      setError('Please add your Anthropic API key in Settings.')
-      return
-    }
+  const generate = () => {
     if (cabinet.length === 0) {
       setError('Add some bottles to your cabinet first.')
       return
     }
-
     setLoading(true)
     setError('')
     setSuggestions([])
     setExpanded(null)
-
-    try {
-      const cabinetCtx = buildCabinetContext(cabinet)
-      const tasteCtx   = buildTasteContext(ratings)
-      const userMsg = [
-        cabinetCtx,
-        tasteCtx,
-        prompt ? `The user is in the mood for: ${prompt}.` : '',
-        'Suggest 3 cocktails I can make right now with what I have on hand.'
-      ].filter(Boolean).join('\n')
-
-      const raw = await callClaude(apiKey, SUGGESTION_SYSTEM, userMsg)
-      const json = JSON.parse(raw.replace(/```json|```/g, '').trim())
-      setSuggestions(json.suggestions || [])
-    } catch (e) {
-      setError(e.message || 'Something went wrong. Check your API key.')
-    } finally {
-      setLoading(false)
-    }
+    setTimeout(() => {
+      try {
+        const results = getSuggestions(cabinet, ratings, prompt)
+        if (results.length === 0) {
+          setError('Nothing in the cabinet matches right now. Try adding more ingredients.')
+        } else {
+          setSuggestions(results)
+        }
+      } catch (e) {
+        setError('Something went wrong generating suggestions.')
+      } finally {
+        setLoading(false)
+      }
+    }, 50)
   }
 
   const handleRate = (suggestion, rating) => {
@@ -82,11 +68,7 @@ export default function Suggestions({ cabinet, ratings, apiKey, onAddReview }) {
           onChange={e => setPrompt(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && generate()}
         />
-        <button
-          className={styles.generateBtn}
-          onClick={generate}
-          disabled={loading}
-        >
+        <button className={styles.generateBtn} onClick={generate} disabled={loading}>
           {loading ? <span className={styles.spinner} /> : '✦'}
           {loading ? 'Consulting the bar...' : 'Suggest Cocktails'}
         </button>
@@ -110,17 +92,16 @@ export default function Suggestions({ cabinet, ratings, apiKey, onAddReview }) {
           >
             <div className={styles.cardHeader} onClick={() => setExpanded(expanded === i ? null : i)}>
               <div className={styles.cardMeta}>
-                <span className={`tag ${s.type === 'classic' ? 'gold' : 'rouge'}`}>
-                  {s.type === 'classic' ? '◈ Classic' : '✦ Original'}
-                </span>
+                <span className="tag gold">◈ Classic</span>
+                {s.missingIngredients?.length > 0 && (
+                  <span className="tag rouge">Missing: {s.missingIngredients.join(', ')}</span>
+                )}
               </div>
               <h3 className={styles.cardName}>{s.name}</h3>
               <p className={styles.cardDesc}>{s.description}</p>
               <div className={styles.flavourTags}>
                 {(s.flavourProfile || []).map(f => (
-                  <span key={f} className={`tag ${FLAVOUR_COLORS[f.toLowerCase()] || ''}`}>
-                    {f}
-                  </span>
+                  <span key={f} className={`tag ${FLAVOUR_COLORS[f.toLowerCase()] || ''}`}>{f}</span>
                 ))}
               </div>
             </div>
@@ -129,9 +110,7 @@ export default function Suggestions({ cabinet, ratings, apiKey, onAddReview }) {
               <div className={styles.cardBody}>
                 <div className={styles.divider}><span>Ingredients</span></div>
                 <ul className={styles.ingredients}>
-                  {(s.ingredients || []).map(ing => (
-                    <li key={ing}>{ing}</li>
-                  ))}
+                  {(s.ingredients || []).map(ing => <li key={ing}>{ing}</li>)}
                 </ul>
 
                 <div className={styles.divider}><span>Method</span></div>
@@ -144,14 +123,7 @@ export default function Suggestions({ cabinet, ratings, apiKey, onAddReview }) {
                 <div className={styles.ratingRow}>
                   <span className={styles.rateLabel}>Rate this:</span>
                   {[1, 2, 3, 4, 5].map(n => (
-                    <button
-                      key={n}
-                      className={styles.rateStar}
-                      onClick={() => handleRate(s, n)}
-                      title={`${n} star${n !== 1 ? 's' : ''}`}
-                    >
-                      ★
-                    </button>
+                    <button key={n} className={styles.rateStar} onClick={() => handleRate(s, n)} title={`${n} star${n !== 1 ? 's' : ''}`}>★</button>
                   ))}
                 </div>
               </div>

@@ -1,46 +1,33 @@
 import React, { useState } from 'react'
-import {
-  callClaude,
-  buildCabinetContext,
-  buildTasteContext,
-  RECOMMENDATION_SYSTEM
-} from '../utils/anthropic.js'
+import { getRecommendations } from '../utils/cocktailMatcher.js'
 import styles from './Recommend.module.css'
 
 const PRICE_LABELS = { '$': 'Budget-friendly', '$$': 'Mid-range', '$$$': 'Splurge' }
 
-export default function Recommend({ cabinet, ratings, apiKey }) {
+export default function Recommend({ cabinet, ratings }) {
   const [recs, setRecs] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [budget, setBudget] = useState('any')
 
-  const generate = async () => {
-    if (!apiKey) { setError('Please add your Anthropic API key in Settings.'); return }
-
+  const generate = () => {
     setLoading(true)
     setError('')
     setRecs([])
-
-    try {
-      const cabinetCtx = buildCabinetContext(cabinet)
-      const tasteCtx   = buildTasteContext(ratings)
-      const budgetNote = budget !== 'any' ? `Budget preference: ${budget} (${PRICE_LABELS[budget]}).` : ''
-      const userMsg = [
-        cabinetCtx || 'The user has an empty cabinet.',
-        tasteCtx || 'No taste history yet.',
-        budgetNote,
-        'Based on my current cabinet and taste preferences, what bottles should I buy next to expand my cocktail repertoire?'
-      ].filter(Boolean).join('\n')
-
-      const raw = await callClaude(apiKey, RECOMMENDATION_SYSTEM, userMsg)
-      const json = JSON.parse(raw.replace(/```json|```/g, '').trim())
-      setRecs(json.recommendations || [])
-    } catch (e) {
-      setError(e.message || 'Something went wrong. Check your API key.')
-    } finally {
-      setLoading(false)
-    }
+    setTimeout(() => {
+      try {
+        const results = getRecommendations(cabinet, ratings, budget === 'any' ? null : budget)
+        if (results.length === 0) {
+          setError('Your cabinet is already pretty complete — nothing obvious to add.')
+        } else {
+          setRecs(results)
+        }
+      } catch (e) {
+        setError('Something went wrong generating recommendations.')
+      } finally {
+        setLoading(false)
+      }
+    }, 50)
   }
 
   return (
