@@ -30,7 +30,6 @@ All data is stored locally in your browser. Export a JSON backup at any time, an
 ### Prerequisites
 
 - Node.js 18+
-- An Anthropic API key — get one at [console.anthropic.com](https://console.anthropic.com)
 
 ### Installation
 
