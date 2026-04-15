@@ -12,7 +12,6 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('cabinet')
   const [cabinet, setCabinet]     = useLocalStorage('cabinet', [])
   const [ratings, setRatings]     = useLocalStorage('ratings', [])
-  const [apiKey, setApiKey]       = useLocalStorage('anthropic_key', '')
 
   const handleAddReview = (review) => {
     setRatings(prev => {
@@ -31,25 +30,11 @@ export default function App() {
       <main className={styles.main}>
         {activeTab === 'cabinet'   && <Cabinet cabinet={cabinet} setCabinet={setCabinet} />}
         {activeTab === 'suggest'   && (
-          <Suggestions
-            cabinet={cabinet}
-            ratings={ratings}
-            apiKey={apiKey}
-            onAddReview={handleAddReview}
-          />
+          <Suggestions cabinet={cabinet} ratings={ratings} onAddReview={handleAddReview} />
         )}
         {activeTab === 'reviews'   && <Reviews ratings={ratings} setRatings={setRatings} />}
-        {activeTab === 'recommend' && (
-          <Recommend cabinet={cabinet} ratings={ratings} apiKey={apiKey} />
-        )}
-        {activeTab === 'settings'  && (
-          <Settings
-            apiKey={apiKey}
-            setApiKey={setApiKey}
-            cabinet={cabinet}
-            ratings={ratings}
-          />
-        )}
+        {activeTab === 'recommend' && <Recommend cabinet={cabinet} ratings={ratings} />}
+        {activeTab === 'settings'  && <Settings cabinet={cabinet} ratings={ratings} />}
       </main>
       <footer className={styles.footer}>
         <span className={styles.footerRule} />
